@@ -71,7 +71,7 @@ public class CommandTPX {
 
     private static int teleportToEntity(CommandSource source, Collection<? extends Entity> targets, Entity destination) {
         for (Entity entity : targets) {
-            teleport(source, entity, (ServerWorld) destination.world, destination.posX, destination.posY, destination.posZ, EnumSet.noneOf(SPlayerPositionLookPacket.Flags.class), destination.rotationYaw, destination.rotationPitch);
+            teleport(source, entity, (ServerWorld) destination.world, destination.getPosX(), destination.getPosY(), destination.getPosZ(), EnumSet.noneOf(SPlayerPositionLookPacket.Flags.class), destination.rotationYaw, destination.rotationPitch);
         }
 
         if (targets.size() == 1) {

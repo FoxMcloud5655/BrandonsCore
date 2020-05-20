@@ -1,7 +1,7 @@
 package com.brandon3055.brandonscore.utils;
 
-import cofh.redstoneflux.api.IEnergyContainerItem;
-import cofh.redstoneflux.api.IEnergyHandler;
+//import cofh.redstoneflux.api.IEnergyContainerItem;
+//import cofh.redstoneflux.api.IEnergyHandler;
 import com.brandon3055.brandonscore.api.power.IOPStorage;
 import com.brandon3055.brandonscore.capability.CapabilityOP;
 import com.brandon3055.brandonscore.capability.OPWrappers;
@@ -25,16 +25,16 @@ public class EnergyUtils {
             LogHelperBC.bigDev("Attempt to do energy operation client side!");
             return null;
         }
-        if (tile instanceof IEnergyHandler) {
-            return new OPWrappers.RF((IEnergyHandler) tile, side);
+        if (tile instanceof IEnergyStorage) {
+            return new OPWrappers.FE((IEnergyStorage) tile);
         }
         return getStorageFromProvider(tile, side);
     }
 
     public static IOPStorage getStorage(ItemStack stack) {
         if (!stack.isEmpty()) {
-            if (stack.getItem() instanceof IEnergyContainerItem) {
-                return new OPWrappers.RFItem((IEnergyContainerItem) stack.getItem(), stack);
+            if (stack.getCapability(CapabilityEnergy.ENERGY) != null) {
+                //return new OPWrappers.RFItem(stack.get, stack);
             }
             else {
                 return getStorageFromProvider(stack, null);
@@ -168,7 +168,7 @@ public class EnergyUtils {
     // ================= Checks =================
 
     public static boolean canExtractEnergy(ItemStack stack) {
-        if (stack.getItem() instanceof IEnergyContainerItem) {
+        if (stack.getCapability(CapabilityEnergy.ENERGY) != null) {
             return true;
         }
         IOPStorage storage = getStorage(stack);
@@ -176,7 +176,7 @@ public class EnergyUtils {
     }
 
     public static boolean canReceiveEnergy(ItemStack stack) {
-        if (stack.getItem() instanceof IEnergyContainerItem) {
+        if (stack.getCapability(CapabilityEnergy.ENERGY) != null) {
             return true;
         }
         IOPStorage storage = getStorage(stack);

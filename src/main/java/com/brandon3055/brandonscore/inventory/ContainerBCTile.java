@@ -2,6 +2,8 @@ package com.brandon3055.brandonscore.inventory;
 
 import com.brandon3055.brandonscore.blocks.TileBCore;
 import com.brandon3055.brandonscore.inventory.ContainerSlotLayout.LayoutFactory;
+import com.google.common.collect.Lists;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -33,6 +35,7 @@ public class ContainerBCTile<T extends TileBCore> extends ContainerBCore<T> {
      * A reference to the attached tile. This may be null if the container is not attached to a tile
      */
     public T tile;
+	private List<IContainerListener> listeners = Lists.newArrayList();
 
     public ContainerBCTile(@Nullable ContainerType<?> type, int windowId, PlayerInventory playerInv, PacketBuffer extraData) {
         super(type, windowId, playerInv, extraData);
@@ -74,7 +77,7 @@ public class ContainerBCTile<T extends TileBCore> extends ContainerBCore<T> {
     @Override
     public void detectAndSendChanges() {
         super.detectAndSendChanges();
-        tile.detectAndSendChangesToListeners(listeners);
+        tile.detectAndSendChangesToListeners(listeners = Lists.newArrayList());
     }
 
     @Override

@@ -133,8 +133,8 @@ public class Utils {
      * Determine the orientation of a blocks based on the position of the entity that placed it.
      */
     public static int determineOrientation(int x, int y, int z, LivingEntity entity) {
-        if (MathHelper.abs((float) entity.posX - (float) x) < 2.0F && MathHelper.abs((float) entity.posZ - (float) z) < 2.0F) {
-            double d0 = entity.posY + 1.82D - (double) entity.getYOffset();
+        if (MathHelper.abs((float) entity.getPosX() - (float) x) < 2.0F && MathHelper.abs((float) entity.getPosZ() - (float) z) < 2.0F) {
+            double d0 = entity.getPosY() + 1.82D - (double) entity.getYOffset();
 
             if (d0 - (double) y > 2.0D) return 0;
 

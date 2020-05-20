@@ -5,7 +5,9 @@ import codechicken.lib.render.buffer.TransformingVertexBuilder;
 import codechicken.lib.util.SneakyUtils;
 import codechicken.lib.vec.Cuboid6;
 import codechicken.lib.vec.Matrix4;
+
 import com.brandon3055.brandonscore.client.ResourceHelperBC;
+import com.brandon3055.brandonscore.client.gui.RenderHelperBC;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -24,8 +26,8 @@ import java.util.List;
  */
 public class GuiHelper {
     public static final RenderType TRANS_TYPE = RenderType.makeType("gui_trans_colour", DefaultVertexFormats.POSITION_COLOR, GL11.GL_QUADS, 256, RenderType.State.getBuilder()
-            .transparency(RenderState.TRANSLUCENT_TRANSPARENCY)
-            .alpha(RenderState.ZERO_ALPHA)
+            .transparency(RenderHelperBC.TRANSLUCENT_TRANSPARENCY)
+            .alpha(new RenderState.AlphaState(0.0F))
             .texturing(new RenderState.TexturingState("lighting", RenderSystem::disableLighting, SneakyUtils.none()))
             .build(false)
     );

@@ -153,13 +153,13 @@ public class RecipeElement extends MDElementBase<RecipeElement> {
                     return true;
                 }
                 //TODO Test this
-                else if (o instanceof ItemStack && !((ItemStack) o).isEmpty() && PIHelper.isInstalled() && PIHelper.getETGuiKey().matchesKey(keyCode, scanCode)) {
-                    List<String> pages = PIHelper.getRelatedPages((ItemStack) o);
-                    if (!pages.isEmpty()) {
-                        PIHelper.openGui(modularGui.getScreen(), pages);
-                        return true;
-                    }
-                }
+//                else if (o instanceof ItemStack && !((ItemStack) o).isEmpty() && PIHelper.isInstalled() && PIHelper.getETGuiKey().matchesKey(keyCode, scanCode)) {
+//                    List<String> pages = PIHelper.getRelatedPages((ItemStack) o);
+//                    if (!pages.isEmpty()) {
+//                        PIHelper.openGui(modularGui.getScreen(), pages);
+//                        return true;
+//                    }
+//                }
             }
 
             return super.keyPressed(keyCode, scanCode, modifiers);

@@ -1,12 +1,13 @@
 package com.brandon3055.brandonscore.capability;
 
-import cofh.redstoneflux.api.IEnergyContainerItem;
-import cofh.redstoneflux.api.IEnergyHandler;
-import cofh.redstoneflux.api.IEnergyProvider;
-import cofh.redstoneflux.api.IEnergyReceiver;
+//import cofh.redstoneflux.api.IEnergyContainerItem;
+//import cofh.redstoneflux.api.IEnergyHandler;
+//import cofh.redstoneflux.api.IEnergyProvider;
+//import cofh.redstoneflux.api.IEnergyReceiver;
 import com.brandon3055.brandonscore.api.power.IOPStorage;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
+import net.minecraftforge.energy.EnergyStorage;
 import net.minecraftforge.energy.IEnergyStorage;
 
 /**
@@ -52,7 +53,7 @@ public class OPWrappers {
             return storage.canReceive();
         }
     }
-
+/*
     public static class RF implements IOPStorage {
         private IEnergyHandler handler;
         private Direction side;
@@ -92,35 +93,35 @@ public class OPWrappers {
             return handler instanceof IEnergyReceiver;
         }
     }
-
+*/
     @Deprecated //ItemStack invalidation may be an issue in 1.14
     public static class RFItem implements IOPStorage {
-        private IEnergyContainerItem handler;
+    	private EnergyStorage handler;
         private ItemStack stack;
 
-        public RFItem(IEnergyContainerItem handler, ItemStack stack) {
-            this.handler = handler;
+        public RFItem(EnergyStorage handler, ItemStack stack) {
+        	this.handler = handler;
             this.stack = stack;
         }
 
         @Override
         public int receiveEnergy(int maxReceive, boolean simulate) {
-            return handler.receiveEnergy(stack, maxReceive, simulate);
+            return handler.receiveEnergy(maxReceive, simulate);
         }
 
         @Override
         public int extractEnergy(int maxExtract, boolean simulate) {
-            return handler.extractEnergy(stack, maxExtract, simulate);
+            return handler.extractEnergy(maxExtract, simulate);
         }
 
         @Override
         public int getEnergyStored() {
-            return handler.getEnergyStored(stack);
+            return handler.getEnergyStored();
         }
 
         @Override
         public int getMaxEnergyStored() {
-            return handler.getMaxEnergyStored(stack);
+            return handler.getMaxEnergyStored();
         }
 
         @Override

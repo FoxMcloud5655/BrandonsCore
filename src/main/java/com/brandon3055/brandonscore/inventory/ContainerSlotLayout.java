@@ -123,8 +123,7 @@ public class ContainerSlotLayout {
         }
 
         public void setPos(int xPos, int yPos) {
-            slot.xPos = xPos;
-            slot.yPos = yPos;
+        	slot = new Slot(slot.inventory, slot.getSlotIndex(), xPos, yPos);
         }
     }
 

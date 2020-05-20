@@ -358,9 +358,9 @@ public class BCUtilCommands {
         List<Entity> list = player.world.getEntitiesWithinAABBExcludingEntity(player, player.getBoundingBox().grow(20.0D));
         double d0 = 0.0D;
 
-        Vec3d start = new Vec3d(player.posX, player.posY + player.getEyeHeight(), player.posZ);
+        Vec3d start = new Vec3d(player.getPosX(), player.getPosY() + player.getEyeHeight(), player.getPosZ());
         Vec3d look = player.getLookVec();
-        Vec3d end = new Vec3d(player.posX + (look.x * 20), player.posY + player.getEyeHeight() + (look.y * 20), player.posZ + (look.z * 20));
+        Vec3d end = new Vec3d(player.getPosX() + (look.x * 20), player.getPosY() + player.getEyeHeight() + (look.y * 20), player.getPosZ() + (look.z * 20));
 
         for (int i = 0; i < list.size(); ++i) {
             Entity entity1 = list.get(i);
@@ -473,7 +473,7 @@ public class BCUtilCommands {
         target = target.toLowerCase();
 
         GameProfile profile = null;
-        if (cache.usernameToProfileEntryMap.containsKey(target)) {
+        if (cache.getGameProfileForUsername(target) != null) {
             profile = cache.getGameProfileForUsername(target);
             target = profile.getId().toString();
         } else {
@@ -587,26 +587,24 @@ public class BCUtilCommands {
             super(worldIn, gameProfileIn);
             this.accessedBy = accessedBy;
             this.playerFile = playerFile;
-            inventory = new PlayerInventory(this) {
-                @Override
-                public void markDirty() {
-                    saveOfflinePlayer();
-                }
-
-                @Override
-                public void clear() {
-                    super.clear();
-                    saveOfflinePlayer();
-                }
-            };
+//            inventory = new PlayerInventory(this) {
+//                @Override
+//                public void markDirty() {
+//                    saveOfflinePlayer();
+//                }
+//
+//                @Override
+//                public void clear() {
+//                    super.clear();
+//                    saveOfflinePlayer();
+//                }
+//            };
             playerCompound = readPlayerCompound(playerFile);
             read(playerCompound);
         }
 
         public void tpTo(PlayerEntity player) {
-            posX = player.posX;
-            posY = player.posY;
-            posZ = player.posZ;
+            setPosition(player.getPosX(), player.getPosY(), player.getPosZ());
             dimension = player.dimension;
             saveOfflinePlayer();
         }

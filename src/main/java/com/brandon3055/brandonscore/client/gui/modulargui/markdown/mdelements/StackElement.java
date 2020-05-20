@@ -168,13 +168,13 @@ public class StackElement extends MDElementBase<StackElement> {
                 return true;
             }
             //TODO Test
-            else if (PIHelper.isInstalled() && PIHelper.getETGuiKey().matchesKey(keyCode, scanCode)) {
-                List<String> pages = PIHelper.getRelatedPages(stack);
-                if (!pages.isEmpty()) {
-                    PIHelper.openGui(modularGui.getScreen(), pages);
-                    return true;
-                }
-            }
+//            else if (PIHelper.isInstalled() && PIHelper.getETGuiKey().matchesKey(keyCode, scanCode)) {
+//                List<String> pages = PIHelper.getRelatedPages(stack);
+//                if (!pages.isEmpty()) {
+//                    PIHelper.openGui(modularGui.getScreen(), pages);
+//                    return true;
+//                }
+//            }
         }
 
         return super.keyPressed(keyCode, scanCode, modifiers);

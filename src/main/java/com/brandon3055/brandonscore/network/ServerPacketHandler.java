@@ -62,14 +62,14 @@ public class ServerPacketHandler implements ICustomPacketHandler.IServerPacketHa
         PlayerEntity other = container.playerAccess;
         switch (button) {
             case 0: //tp to player
-                TeleportUtils.teleportEntity(sender, other.dimension.getId(), other.posX, other.posY, other.posZ, other.rotationYaw, other.rotationPitch);
+                TeleportUtils.teleportEntity(sender, other.dimension.getId(), other.getPosX(), other.getPosY(), other.getPosZ(), other.rotationYaw, other.rotationPitch);
                 break;
             case 1: //tp player to you
                 if (other instanceof OfflinePlayer) {
                     ((OfflinePlayer) other).tpTo(sender);
                 }
                 else {
-                    TeleportUtils.teleportEntity(other, sender.dimension.getId(), sender.posX, sender.posY, sender.posZ, sender.rotationYaw, sender.rotationPitch);
+                    TeleportUtils.teleportEntity(other, sender.dimension.getId(), sender.getPosX(), sender.getPosY(), sender.getPosZ(), sender.rotationYaw, sender.rotationPitch);
                 }
                 break;
             case 2: //clear player inventory

@@ -13,7 +13,7 @@ import java.util.Map;
 /**
  * Created by brandon3055 on 10/07/2017.
  */
-@Deprecated //TODO Investigate changes to the vanilla font renderer and ether remove or update this
+@Deprecated //TODO Investigate changes to the vanilla font renderer and either remove or update this
 public class BCFontRenderer extends FontRenderer {
     private static boolean styleToggleMode = false;
     private static boolean colourSet = false;
@@ -28,9 +28,9 @@ public class BCFontRenderer extends FontRenderer {
     int recurs = 0;
 
     //This is a temporary hack that wont be needed once i re write my gui system
-    @Override
+    //@Override
     public int renderStringAt(String text, float x, float y, int color, boolean dropShadow, Matrix4f matrix, IRenderTypeBuffer buffer, boolean transparentIn, int colorBackgroundIn, int packedLight) {
-        if (this.bidiFlag) {
+        if (this.getBidiFlag()) {
             text = this.bidiReorder(text);
         }
 
@@ -39,12 +39,12 @@ public class BCFontRenderer extends FontRenderer {
         }
 
         if (dropShadow) {
-            this.renderStringAtPos(text, x, y, color, true, matrix, buffer, transparentIn, colorBackgroundIn, packedLight);
+            super.renderString(text, x, y, color, true, matrix, buffer, transparentIn, colorBackgroundIn, packedLight);
         }
 
         Matrix4f matrix4f = matrix.copy();
 //        matrix4f.translate(new Vector3f(0.0F, 0.0F, 0.001F));
-        x = this.renderStringAtPos(text, x, y, color, false, matrix4f, buffer, transparentIn, colorBackgroundIn, packedLight);
+        x = super.renderString(text, x, y, color, false, matrix4f, buffer, transparentIn, colorBackgroundIn, packedLight);
         return (int)x + (dropShadow ? 1 : 0);
     }
 
@@ -204,9 +204,10 @@ public class BCFontRenderer extends FontRenderer {
 
     public static BCFontRenderer convert(FontRenderer fontRenderer) {
         if (!cashedRenderers.containsKey(fontRenderer)) {
-            BCFontRenderer fr = new BCFontRenderer(fontRenderer.textureManager, fontRenderer.font);
+        	BCFontRenderer fontR = (BCFontRenderer)fontRenderer;
+//            BCFontRenderer fr = new BCFontRenderer(fontRenderer.textureManager, fontRenderer.font);
 //                        ((IReloadableResourceManager) Minecraft.getInstance().getResourceManager()).addReloadListener(fr);
-            cashedRenderers.put(fontRenderer, fr);
+            cashedRenderers.put(fontRenderer, fontR);
         }
 
         return cashedRenderers.get(fontRenderer);

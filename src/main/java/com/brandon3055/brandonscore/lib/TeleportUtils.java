@@ -21,7 +21,7 @@ import java.util.LinkedList;
 public class TeleportUtils {
 
     public static Entity teleportEntity(Entity entity, Entity destination) {
-        return teleportEntity(entity, destination.dimension, destination.posX, destination.posY, destination.posZ, destination.rotationYaw, destination.rotationPitch);
+        return teleportEntity(entity, destination.dimension, destination.getPosX(), destination.getPosY(), destination.getPosZ(), destination.rotationYaw, destination.rotationPitch);
     }
 
     /**
@@ -234,9 +234,9 @@ public class TeleportUtils {
         public PassengerHelper(Entity entity) {
             this.entity = entity;
             if (entity.isPassenger()) {
-                offsetX = entity.posX - entity.getRidingEntity().posX;
-                offsetY = entity.posY - entity.getRidingEntity().posY;
-                offsetZ = entity.posZ - entity.getRidingEntity().posZ;
+                offsetX = entity.getPosX() - entity.getRidingEntity().getPosX();
+                offsetY = entity.getPosY() - entity.getRidingEntity().getPosY();
+                offsetZ = entity.getPosZ() - entity.getRidingEntity().getPosZ();
             }
             for (Entity passenger : entity.getPassengers()) {
                 passengers.add(new PassengerHelper(passenger));
@@ -272,7 +272,7 @@ public class TeleportUtils {
                 return;
             }
             if (entity.isPassenger()) {
-                entity.setLocationAndAngles(entity.posX + offsetX, entity.posY + offsetY, entity.posZ + offsetZ, entity.rotationYaw, entity.rotationPitch);
+                entity.setLocationAndAngles(entity.getPosX() + offsetX, entity.getPosY() + offsetY, entity.getPosZ() + offsetZ, entity.rotationYaw, entity.rotationPitch);
             }
             for (PassengerHelper passenger : passengers) {
                 passenger.entity.startRiding(entity, true);

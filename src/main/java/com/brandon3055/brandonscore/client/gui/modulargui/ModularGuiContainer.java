@@ -35,6 +35,18 @@ public abstract class ModularGuiContainer<T extends Container> extends Container
     private boolean experimentalSlotOcclusion = false;
     @Deprecated
     protected boolean dumbGui = false;
+    //Start Super Vars
+	private ItemStack draggedStack = ItemStack.EMPTY;
+	private boolean isRightMouseClick;
+	private int dragSplittingRemnant;
+	private long returningStackTime;
+	private ItemStack returningStack = ItemStack.EMPTY;
+	private Slot returningStackDestSlot;
+	private int touchUpX;
+	private int touchUpY;
+	private Slot clickedSlot;
+	private int dragSplittingLimit;
+	//End Super Vars
 
     public ModularGuiContainer(T container, PlayerInventory inv, ITextComponent titleIn) {
         super(container, inv, titleIn);
@@ -297,7 +309,7 @@ public abstract class ModularGuiContainer<T extends Container> extends Container
 
             boolean occluded = manager.isAreaUnderElement(slot.xPos + guiLeft(), slot.yPos + guiTop(), 16, 16, 100);
             if (!occluded || experimentalSlotOcclusion) {
-                if (!occluded && this.isSlotSelected(slot, mouseX, mouseY) && slot.isEnabled()) {
+                if (!occluded && this.getSlotUnderMouse() == slot && slot.isEnabled()) {
                     this.hoveredSlot = slot;
                     RenderSystem.disableDepthTest();
                     int j1 = slot.xPos;
@@ -331,7 +343,7 @@ public abstract class ModularGuiContainer<T extends Container> extends Container
                 }
             }
 
-            this.drawItemStack(itemstack, mouseX - left - 8, mouseY - top - k2, s);
+            //this.drawItemStack(itemstack, mouseX - left - 8, mouseY - top - k2, s);
         }
 
         if (!this.returningStack.isEmpty()) {
@@ -345,7 +357,7 @@ public abstract class ModularGuiContainer<T extends Container> extends Container
             int i3 = this.returningStackDestSlot.yPos - this.touchUpY;
             int l1 = this.touchUpX + (int) ((float) l2 * f);
             int i2 = this.touchUpY + (int) ((float) i3 * f);
-            this.drawItemStack(this.returningStack, l1, i2, null);
+            //this.drawItemStack(this.returningStack, l1, i2, null);
         }
 
         RenderSystem.popMatrix();
@@ -385,7 +397,7 @@ public abstract class ModularGuiContainer<T extends Container> extends Container
                 }
             } else {
                 this.dragSplittingSlots.remove(slotIn);
-                this.updateDragSplitting();
+                //this.updateDragSplitting();
             }
         }
 

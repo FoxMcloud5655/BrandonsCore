@@ -4,7 +4,9 @@ import codechicken.lib.colour.Colour;
 import codechicken.lib.colour.ColourARGB;
 import codechicken.lib.util.SneakyUtils;
 import codechicken.lib.vec.Vector3;
+
 import com.brandon3055.brandonscore.client.ResourceHelperBC;
+import com.brandon3055.brandonscore.client.gui.RenderHelperBC;
 import com.brandon3055.brandonscore.client.gui.modulargui.baseelements.GuiScrollElement;
 import com.brandon3055.brandonscore.client.gui.modulargui.lib.*;
 import com.brandon3055.brandonscore.client.gui.modulargui.lib.GuiAlign.TextRotation;
@@ -69,15 +71,15 @@ import java.util.stream.Collectors;
 public class GuiElement<E extends GuiElement<E>> implements IMouseOver, IGuiParentElement<E> {
     protected static final ResourceLocation WIDGETS_TEXTURES = new ResourceLocation("textures/gui/widgets.png");
     protected static final RenderType transColourType = RenderType.makeType("trans_colour", DefaultVertexFormats.POSITION_COLOR, GL11.GL_QUADS, 256, RenderType.State.getBuilder()
-            .transparency(RenderState.TRANSLUCENT_TRANSPARENCY)
-            .cull(RenderState.CULL_DISABLED)
-            .shadeModel(RenderState.SHADE_ENABLED)
+            .transparency(RenderHelperBC.TRANSLUCENT_TRANSPARENCY)
+            .cull(new RenderState.CullState(false))
+            .shadeModel(new RenderState.ShadeModelState(true))
             .texturing(new RenderState.TexturingState("lighting", RenderSystem::disableLighting, SneakyUtils.none()))
             .build(false)
     );
 //    protected static final RenderType widgetsType = RenderType.makeType("widgets", DefaultVertexFormats.POSITION_TEX_COLOR, GL11.GL_QUADS, 256, RenderType.State.getBuilder()
 //            .texture(new RenderState.TextureState(WIDGETS_TEXTURES, false, false))
-//            .transparency(RenderState.TRANSLUCENT_TRANSPARENCY)
+//            .transparency(RenderHelperBC.TRANSLUCENT_TRANSPARENCY)
 //            .texturing(new RenderState.TexturingState("lighting", RenderSystem::disableLighting, SneakyUtils.none()))
 //            .build(false)
 //    );

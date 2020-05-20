@@ -2,6 +2,7 @@ package com.brandon3055.brandonscore.client;
 
 import codechicken.lib.util.SneakyUtils;
 import com.brandon3055.brandonscore.BCConfig;
+import com.brandon3055.brandonscore.client.gui.RenderHelperBC;
 import com.brandon3055.brandonscore.client.gui.GuiToolkit.GuiLayout;
 import com.brandon3055.brandonscore.client.render.GuiSpriteUploader;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -36,7 +37,7 @@ public class BCSprites {
 
 //    public static final RenderType guiType = RenderType.makeType("gui", DefaultVertexFormats.POSITION_TEX, GL11.GL_QUADS, 256, RenderType.State.getBuilder()
 //            .texture(new RenderState.TextureState(LOCATION_GUI_ATLAS, false, false))
-//            .transparency(RenderState.TRANSLUCENT_TRANSPARENCY)
+//            .transparency(RenderHelperBC.TRANSLUCENT_TRANSPARENCY)
 //            .cull(RenderState.CULL_DISABLED)
 //            .texturing(new RenderState.TexturingState("lighting", RenderSystem::disableLighting, SneakyUtils.none()))
 //            .build(false)
@@ -44,8 +45,8 @@ public class BCSprites {
 
     public static final RenderType guiTexType = RenderType.makeType("gui_tex", DefaultVertexFormats.POSITION_COLOR_TEX, GL11.GL_QUADS, 256, RenderType.State.getBuilder()
             .texture(new RenderState.TextureState(LOCATION_GUI_ATLAS, false, false))
-            .transparency(RenderState.TRANSLUCENT_TRANSPARENCY)
-            .cull(RenderState.CULL_DISABLED)
+            .transparency(RenderHelperBC.TRANSLUCENT_TRANSPARENCY)
+            .cull(new RenderState.CullState(false))
             .texturing(new RenderState.TexturingState("lighting", RenderSystem::disableLighting, SneakyUtils.none()))
             .build(false)
     );
@@ -182,8 +183,8 @@ public class BCSprites {
     public static RenderType makeType(ResourceLocation location) {
         return RenderType.makeType("sprite_type", DefaultVertexFormats.POSITION_TEX, GL11.GL_QUADS, 256, RenderType.State.getBuilder()
                 .texture(new RenderState.TextureState(location, false, false))
-                .transparency(RenderState.TRANSLUCENT_TRANSPARENCY)
-                .cull(RenderState.CULL_DISABLED)
+                .transparency(RenderHelperBC.TRANSLUCENT_TRANSPARENCY)
+                .cull(new RenderState.CullState(false))
                 .texturing(new RenderState.TexturingState("lighting", RenderSystem::disableLighting, SneakyUtils.none()))
                 .build(false));
     }
