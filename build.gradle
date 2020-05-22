@@ -51,6 +51,7 @@ version = version + ".${buildNo}"
 dependencies {
     minecraft "net.minecraftforge:forge:${config.mc_version}-${config.forge_version}"
     compile "codechicken:CodeChickenLib:${config.mc_version}-${config.ccl_version}:deobf"
+    compile "mezz.jei:jei-1.15.2:6.0.0.4"
 }
 
 minecraft {
